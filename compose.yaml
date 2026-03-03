@@ -1,7 +1,21 @@
-version: '3'
-
 services:
-###> doctrine/doctrine-bundle ###
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    # Expose and map HTTP and HTTPS ports
+    ports:
+      - 80:8080
+      - 443:8443
+    # Mount current directory to /var/www/html
+    volumes:
+      - ./:/var/www/html
+    # Support both HTTP and HTTPS
+    environment:
+      SSL_MODE: mixed
+
   database:
     image: mysql:${MYSQL_VERSION:-8.4}
     environment:
@@ -13,9 +27,6 @@ services:
       - database_data:/var/lib/mysql
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       # - ./docker/db/data:/var/lib/mysql:rw
-###< doctrine/doctrine-bundle ###
 
 volumes:
-###> doctrine/doctrine-bundle ###
   database_data:
-###< doctrine/doctrine-bundle ###
