@@ -22,3 +22,19 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Alias ResourceLocatorGeneratorInterface to enable autowiring in BasePageFactory
+    Sulu\Route\Application\ResourceLocator\ResourceLocatorGeneratorInterface:
+        alias: sulu_route.resource_locator_generator
+
+when@dev:
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Factory\Pages\PageFactory:
+            public: true
+        App\Factory\Form\FormFactory:
+            public: true
