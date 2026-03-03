@@ -42,5 +42,15 @@
                 <title lang="de">Artikel</title>
             </meta>
         </property>
+
+        <property name="form" type="single_form_selection">
+            <meta>
+                <title lang="en">Form</title>
+            </meta>
+
+            <params>
+                <param name="resourceKey" value="page"/>
+            </params>
+        </property>
     </properties>
 </template>
